@@ -10,5 +10,5 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
     //수정
-
+    //또테스트
 }
