@@ -33,9 +33,9 @@ public class MainController {
     }
 
     @PutMapping("/company/update/{id}")
-    public void update(@PathVariable Long id, @RequestBody CompanyDto companyDto) {
+    public void update(@PathVariable Long id) {
 
-        hotelService.update(id, companyDto);
+        hotelService.update(id);
     }
 
     @DeleteMapping("/company/delete/{id}")
