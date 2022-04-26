@@ -47,7 +47,6 @@ public class HotelService {
                 () -> new RuntimeException("resource not found")
         );
 
-        System.out.println("id"  + id+  companyDto.sanhaname);
     }
 
     @Transactional
