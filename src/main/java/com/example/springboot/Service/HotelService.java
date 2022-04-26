@@ -1,6 +1,7 @@
 package com.example.springboot.Service;
 
 import com.example.springboot.Entity.Sanha;
+import com.example.springboot.Entity.TopAndDown;
 import com.example.springboot.Entity.Yanolja;
 import com.example.springboot.dto.CompanyDto;
 import com.example.springboot.repository.SanhaRepository;
@@ -37,16 +38,17 @@ public class HotelService {
         );
 
         return sanha.getId() + "+" + sanha.getYanolja().getName();
-
     }
 
     @Transactional
-    public void update (Long id , CompanyDto companyDto){
+    public void update (Long id){
 
         Sanha sanha = sanhaRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("resource not found")
         );
 
+        sanha.setName("Sanhatest");
+        sanha.setTopAndDown(TopAndDown.DOWN);
     }
 
     @Transactional
