@@ -27,6 +27,9 @@ public class HotelService {
         Sanha sanha = new Sanha(companyDto.sanhaname, companyDto.topAndDown);
 
         Yanolja yanolja = new Yanolja(companyDto.yanoljaName, sanha);
+
+        yanolja.getSanhaList().add(sanha);
+
         return yanoljaRepository.save(yanolja);
     }
 
@@ -34,7 +37,7 @@ public class HotelService {
     public String get(Long id) {
 
         Sanha sanha = sanhaRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("resource not found")
+                () -> new IllegalArgumentException("resource not found")
         );
 
         return sanha.getId() + "+" + sanha.getYanolja().getName();
@@ -44,7 +47,7 @@ public class HotelService {
     public void update (Long id){
 
         Sanha sanha = sanhaRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("resource not found")
+                () -> new IllegalArgumentException("resource not found")
         );
 
         sanha.setName("Sanhatest");
