@@ -1,36 +1,53 @@
 package com.example.springboot.Controller;
 
 
-import com.example.springboot.Entity.Member;
-import com.example.springboot.repository.MemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.springboot.Entity.Yanolja;
+import com.example.springboot.Service.HotelService;
+import com.example.springboot.dto.CompanyDto;
+
+import com.example.springboot.repository.SanhaRepository;
+import com.example.springboot.repository.YanoljaRepository;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
+
 public class MainController {
 
 
-    private MemberRepository memberRepository;
+    private final HotelService hotelService;
 
-    @GetMapping ( "/company/id")
-    public String first(@RequestBody Member member){
-
-        member.setId(1l);
-        member.setName("박진우");
-
-        Member member2 = new Member();
-        member2.setId(2L);
-        member2.setName("정인욱");
-        System.out.println("여기");
-
-        Member member1 = memberRepository.save(member);
-        Member member3 = memberRepository.save(member2);
-
-
-        return member1.getName() + " + " + member3.getName();
-        //feat
+    public MainController(HotelService hotelService) {
+        this.hotelService = hotelService;
     }
+
+    @GetMapping ( "/company/get/{id}")
+    public String get(@PathVariable ("id") Long id ){
+
+        return hotelService.get(id);
+    }
+
+    @PostMapping("/company/join")
+    public Yanolja insert(@RequestBody CompanyDto companyDto) {
+
+        return hotelService.insert(companyDto);
+    }
+
+    @PutMapping("/company/update/{id}")
+    public void update(@PathVariable Long id, @RequestBody CompanyDto companyDto) {
+
+        hotelService.update(id, companyDto);
+    }
+
+    @DeleteMapping("/company/delete/{id}")
+    public void delete(@PathVariable Long id) {
+
+        hotelService.delete(id);
+    }
+
+
+
+
+
 
 
 
